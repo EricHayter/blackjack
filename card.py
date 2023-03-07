@@ -6,15 +6,16 @@ class Card:
        self.rank = rank
        self.suit = suit
 
-    @property
-    def suit(self):
-        print('we be setting')
-        return self.suit
+    def __repr__(self):
+        return self.rank.name + " " + self.suit.name
 
-    @property
-    def rank(self):
-        print('we be setting')
-        return self.rank
+    #@property
+    #def suit(self):
+    #    return self._suit
+
+    #@property
+    #def rank(self):
+    #    return self.rank
 
     #@suit.getter
     #def suit() -> Suit:

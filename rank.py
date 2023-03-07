@@ -1,6 +1,8 @@
-from enum import Enum
+from aenum import Enum, NoAlias
 
 class Rank(Enum):
+    _settings_ = NoAlias
+
     ACE: int = 1
     TWO: int = 2
     THREE: int = 3

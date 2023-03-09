@@ -1,41 +1,46 @@
-import random
-from collections import Counter
-from itertools import product, repeat
+from itertools import product, repeat, chain
+from random import shuffle
+from typing import List
 
 from card import Card
 from rank import Rank
 from suit import Suit
 
 
-def iter_sample_fast(iterable, samplesize):
-    results = []
-    iterator = iter(iterable)
-    # Fill in the first samplesize elements:
-    try:
-        for e in iterable:
-            results.append(e)
-    except StopIteration:
-        raise ValueError("Sample larger than population.")
-    random.shuffle(results)  # Randomize their positions
-    for i, v in enumerate(iterator, samplesize):
-        r = random.randint(0, i)
-        if r < samplesize:
-            results[r] = v  # at a decreasing rate, replace random items
-    return results
-
-
 class Dealer:
-    def __init__(self, num_decks=6):
-        deck = [] 
+    DEFAULT_DECK: List[Card] = [Card(r, s) for r,s in  (product(list(Rank), list(Suit)))]
+    def __init__(self, num_decks:int =6):
+        '''
+        Creates a deck of cards consisting of num_decks amount of 52-card standard decks and then
+        shuffles the deck
+        '''
+        self.num_decks = num_decks
+        self.deck = list(chain.from_iterable(repeat(c, num_decks) for c in Dealer.DEFAULT_DECK))
+        shuffle(deck)
 
-# create a iterable for a deck
-deck = [Card(r, s) for r,s in  (product(list(Rank), list(Suit)))]
+
+    def get_card(self) -> Card:
+        '''
+        returns a card popped off the deck
+        '''
+        return self.deck.pop()
 
 
-for i in range(1):
-    c = repeat(deck, 6)
-    print(iter_sample_fast(c, 1))
+    def get_num_cards(self) -> int:
+        '''
+        gives the amount of cards that are left in the deck
+        '''
+        return len(self.deck)
 
+    
+    def reset_deck(self) -> None:
+        '''
+        creates a new deck of the cards from num_decks decks of cards
+        '''
+        self.__init__(self.num_decks) 
+
+
+    
     
 
 

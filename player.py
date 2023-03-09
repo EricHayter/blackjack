@@ -6,10 +6,14 @@ from typing import List
 
 class Player:
     def __init__(self):
+        # implenment some sort of wager system?
         self.hand: List[Card] = list()
 
 
     def add_card(self, card: Card) -> None:
+        '''
+        Adds a card to the player's hand
+        '''
         self.hand.append(card)
 
 
@@ -24,5 +28,8 @@ class Player:
 
 
     def get_hand(self) -> List[Card]:
+        '''
+        returns the player's hand
+        '''
         return list(self.hand)
 

@@ -7,7 +7,7 @@ from rank import Rank
 from suit import Suit
 
 
-class Dealer:
+class Deck:
     DEFAULT_DECK: List[Card] = [Card(r, s) for r,s in  (product(list(Rank), list(Suit)))]
     def __init__(self, num_decks:int =6):
         '''
@@ -15,22 +15,22 @@ class Dealer:
         shuffles the deck
         '''
         self.num_decks = num_decks
-        self.deck = list(chain.from_iterable(repeat(c, num_decks) for c in Dealer.DEFAULT_DECK))
-        shuffle(deck)
+        self.cards = list(chain.from_iterable(repeat(c, num_decks) for c in Dealer.DEFAULT_DECK))
+        shuffle(cards)
 
 
     def get_card(self) -> Card:
         '''
         returns a card popped off the deck
         '''
-        return self.deck.pop()
+        return self.cards.pop()
 
 
     def get_num_cards(self) -> int:
         '''
         gives the amount of cards that are left in the deck
         '''
-        return len(self.deck)
+        return len(self.cards)
 
     
     def reset_deck(self) -> None:

@@ -21,7 +21,15 @@ class TestPlayer(unittest.TestCase):
         p = Player()
         c = Card(Rank.ACE, Suit.HEART)
         p.add_card(c)
-        self.assertEqual(p.hand == [c],True)
+        self.assertEqual(p._hand == [c],True)
+
+    def test_hand_value(self):
+        '''
+        testing to see if the value function is working correctly
+        '''
+        p = Player()
+        p.add_card(Card(Rank.ACE, Suit.HEART))
+        self.assertEqual(p.get_hand_value(), 11)
 
 
 if __name__ == '__main__':

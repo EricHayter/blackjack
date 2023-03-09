@@ -8,6 +8,7 @@ class Player:
     def __init__(self):
         # implenment some sort of wager system?
         self._hand: List[Card] = list()
+        self._playing: bool = True
 
 
     def add_card(self, card: Card) -> None:
@@ -26,28 +27,35 @@ class Player:
 
         return self._hand[idx]
 
-    
+
     @property
-    def hand(self) -> Tuple[Card]:
+    def hand(self) -> List[Card]:
         '''
-        returns the player's hand
+        returns a copy of the player's hand
         '''
-        return tuple(self.hand)
+        return list(self._hand)
+
+    @property
+    def playing(self) -> bool:
+        return self._playing
+
+    def stand(self) -> None:
+        self._playing = False
 
 
     def get_hand_value(self) -> int:
-            '''
-            finds the value of the player's current hand
-            '''
-            sum_hand = 0
-            num_aces  = 0
+        '''
+        finds the value of the player's current hand
+        '''
+        sum_hand = 0
+        num_aces  = 0
 
-            for c in self._hand:
-                if c.rank == Rank.ACE:
-                    num_aces += 1
+        for c in self._hand:
+            if c.rank == Rank.ACE:
+                num_aces += 1
 
-                sum_hand += c.rank.value
+            sum_hand += c.rank.value
 
-            return max([sum_hand + n*10 if sum_hand + n*10 <= 21 else 0 for n in range(num_aces + 1)])
+        return max([sum_hand + n*10 if sum_hand + n*10 <= 21 else 0 for n in range(num_aces + 1)])
 
 

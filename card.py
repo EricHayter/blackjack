@@ -7,7 +7,7 @@ class Card:
         self._suit = suit
 
     def __repr__(self):
-        return self.rank.name + " " + self.suit.name
+        return self._rank.name + " " + self._suit.name
 
     @property
     def suit(self):

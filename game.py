@@ -1,10 +1,8 @@
 from typing import List
 
-from card import Card
 from deck import Deck
+from dealer import Dealer
 from player import Player
-from rank import Rank
-from suit import Suit
 
 class Game:
     MIN_CARDS = 52 # cards to play with before resetting the deck
@@ -18,7 +16,7 @@ class Game:
 
 
     def play(self) -> None:
-        if self.deck.get_num_cards < Game.MIN_CARDS:
+        if self.deck.get_num_cards() < Game.MIN_CARDS:
             self.deck.reset_deck()
 
         self.dealer.add_card(self.deck.get_card())
@@ -33,6 +31,8 @@ class Game:
         for p in self.players:
             if p.get_hand_value() > 21:
                 continue
+
+
 
 
 

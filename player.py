@@ -1,10 +1,13 @@
 from card import Card
 from rank import Rank
-from suit import Suit
 
-from typing import List, Tuple
+from typing import List
 
 class Player:
+    STAND: int = 0
+    HIT: int = 1
+    SPLIT: int = 2
+
     def __init__(self):
         # implenment some sort of wager system?
         self._hand: List[Card] = list()
@@ -58,4 +61,13 @@ class Player:
 
         return max([sum_hand + n*10 if sum_hand + n*10 <= 21 else 0 for n in range(num_aces + 1)])
 
+
+    def get_best_play(self, dealer_card: Card) -> int:
+        # checking for pairs
+        if self._hand[0].rank == self._hand[1].rank:
+           return Player.HIT 
+        elif self._hand[0].rank == Rank.ACE or self._hand[1].rank == Rank.ACE:
+            return Player.HIT
+        else:
+            return Player.HIT
 
